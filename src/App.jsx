@@ -9,13 +9,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <Navbar />
-      {/* Home Route */}
-      <Home/>
       <Routes>
-
+        {/* Home Route */}
+        <Route path="/" element={<Home />} />
         {/* Notes Route */}
         <Route path="/notes" element={<NotesPage />} />
-
         {/* Placeholder Routes */}
         <Route path="/marketplace" element={<h1 className="p-10 text-center">Marketplace Coming Soon 🚀</h1>} />
         <Route path="/about" element={<h1 className="p-10 text-center">About Page</h1>} />
