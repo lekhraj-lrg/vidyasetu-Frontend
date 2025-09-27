@@ -1,100 +1,59 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom"; // ✅ use Link for routing
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const [active, setActive] = useState("Home"); // track active link
 
-  const navItems = ["Home", "Notes", "Marketplace", "About", "Contact"];
-
-  useEffect(() => {
-    const sections = navItems.map((item) =>
-      document.getElementById(item.toLowerCase())
-    );
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.6 } // 60% of section visible = active
-    );
-
-    sections.forEach((sec) => {
-      if (sec) observer.observe(sec);
-    });
-
-    return () => {
-      sections.forEach((sec) => {
-        if (sec) observer.unobserve(sec);
-      });
-    };
-  }, []);
+  const linkClasses = (name) =>
+    `relative hover:text-blue-900 after:block after:h-[2px] after:bg-blue-900 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left
+     ${active === name ? "text-blue-900 after:scale-x-100" : ""}`;
 
   return (
-    <nav className="w-full shadow-sm bg-white fixed top-0 left-2 z-50">
-      <div className="px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <nav className="w-full shadow-sm sticky top-0 bg-white z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
           {/* Logo */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
             <div className="bg-blue-900 text-white p-2 rounded-full">📖</div>
             <div>
-              <h1 className="font-bold text-lg">VidyaSetu</h1>
+              <h1 className="text-lg font-bold">VidyaSetu</h1>
               <p className="text-xs text-gray-500">Academic Bridge</p>
             </div>
           </div>
 
-          {/* Menu for large screens */}
-          <div className="hidden md:flex items-center space-x-10">
-            {navItems.map((item) => {
-              const id = item.toLowerCase();
-              return (
-                <a
-                  key={item}
-                  href={`#${id}`}
-                  className={`relative group transition ${
-                    activeSection === id
-                      ? "text-blue-900 font-semibold"
-                      : "text-gray-600 hover:text-blue-900"
-                  }`}
-                >
-                  {item}
-                  <span
-                    className={`absolute left-0 bottom-0 h-[2px] bg-blue-900 transition-all duration-300 ${
-                      activeSection === id ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
-                  ></span>
-                </a>
-              );
-            })}
+          {/* Desktop Menu */}
+          <div className="hidden md:flex flex-1 justify-center space-x-8">
+            <Link to="/" onClick={() => setActive("Home")} className={linkClasses("Home")}>
+              Home
+            </Link>
+            <Link to="/notes" onClick={() => setActive("Notes")} className={linkClasses("Notes")}>
+              Notes
+            </Link>
+            <Link to="/marketplace" onClick={() => setActive("Marketplace")} className={linkClasses("Marketplace")}>
+              Marketplace
+            </Link>
+            <Link to="/about" onClick={() => setActive("About")} className={linkClasses("About")}>
+              About
+            </Link>
+            <Link to="/contact" onClick={() => setActive("Contact")} className={linkClasses("Contact")}>
+              Contact
+            </Link>
           </div>
 
-          {/* Login & Join */}
-          <div className="hidden md:flex items-center space-x-10">
-            <a
-              href="#login"
-              className="text-gray-600 hover:text-blue-900 transition relative group"
-            >
-              Login
-              <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-blue-900 transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a
-              href="#join"
-              className="bg-blue-900 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-800 transition"
-            >
+          {/* Right Side Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Link to="/login" className="hover:text-blue-900">Login</Link>
+            <button className="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
               Join Now
-            </a>
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Hamburger */}
           <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-900"
-            >
-              {isOpen ? "✖" : "☰"}
+            <button onClick={() => setIsOpen(!isOpen)} className="focus:outline-none">
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
@@ -103,37 +62,30 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden px-4 pb-4 space-y-2">
-          {navItems.map((item) => {
-            const id = item.toLowerCase();
-            return (
-              <a
-                key={item}
-                href={`#${id}`}
-                onClick={() => setIsOpen(false)}
-                className={`block transition ${
-                  activeSection === id
-                    ? "text-blue-900 font-semibold"
-                    : "text-gray-600 hover:text-blue-900"
-                }`}
-              >
-                {item}
-              </a>
-            );
-          })}
-          <a
-            href="#login"
-            className="block text-gray-600 hover:text-blue-900 transition"
-            onClick={() => setIsOpen(false)}
-          >
-            Login
-          </a>
-          <a
-            href="#join"
-            className="block bg-blue-900 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-800 transition"
-            onClick={() => setIsOpen(false)}
-          >
+          <Link to="/" onClick={() => { setActive("Home"); setIsOpen(false); }}
+            className={active === "Home" ? "text-blue-900 font-semibold" : "hover:text-blue-900"}>
+            Home
+          </Link>
+          <Link to="/notes" onClick={() => { setActive("Notes"); setIsOpen(false); }}
+            className={active === "Notes" ? "text-blue-900 font-semibold" : "hover:text-blue-900"}>
+            Notes
+          </Link>
+          <Link to="/marketplace" onClick={() => { setActive("Marketplace"); setIsOpen(false); }}
+            className={active === "Marketplace" ? "text-blue-900 font-semibold" : "hover:text-blue-900"}>
+            Marketplace
+          </Link>
+          <Link to="/about" onClick={() => { setActive("About"); setIsOpen(false); }}
+            className={active === "About" ? "text-blue-900 font-semibold" : "hover:text-blue-900"}>
+            About
+          </Link>
+          <Link to="/contact" onClick={() => { setActive("Contact"); setIsOpen(false); }}
+            className={active === "Contact" ? "text-blue-900 font-semibold" : "hover:text-blue-900"}>
+            Contact
+          </Link>
+          <Link to="/login" className="hover:text-blue-900">Login</Link>
+          <button className="w-full bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
             Join Now
-          </a>
+          </button>
         </div>
       )}
     </nav>

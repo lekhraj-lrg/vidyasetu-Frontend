@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section id="home" className="w-full bg-white py-12 mt-24 ">
       {/* Main Hero Section */}
-      <div className="px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
         <div className="space-y-6">
           {/* Badge */}
