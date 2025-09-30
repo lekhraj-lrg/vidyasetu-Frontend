@@ -45,9 +45,11 @@ const Navbar = () => {
           {/* Right Side Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <Link to="/login" className="hover:text-blue-900">Login</Link>
-            <button className="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-              Join Now
-            </button>
+            <Link to="/signup">
+    <button className="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+      Join Now
+    </button>
+  </Link>
           </div>
 
           {/* Mobile Hamburger */}
@@ -83,9 +85,11 @@ const Navbar = () => {
             Contact
           </Link>
           <Link to="/login" className="hover:text-blue-900">Login</Link>
-          <button className="w-full bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-            Join Now
-          </button>
+          <Link to="/signup">
+            <button className="w-full bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+             Join Now
+            </button>
+          </Link>
         </div>
       )}
     </nav>

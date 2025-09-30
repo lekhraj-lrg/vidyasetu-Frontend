@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { FaUsers, FaBook, FaMedal, FaGlobe } from "react-icons/fa";
+import lekhrajImg from "../assets/lekhraj.png"
+import dipeshImg from "../assets/dipesh.png"
 
+// Stats Section Data
 const stats = [
   { id: 1, icon: <FaUsers size={28} />, value: "10,000+", label: "Active Students" },
   { id: 2, icon: <FaBook size={28} />, value: "5,000+", label: "Study Materials" },
@@ -9,6 +12,7 @@ const stats = [
   { id: 4, icon: <FaGlobe size={28} />, value: "25+", label: "Cities Covered" },
 ];
 
+// Core Values Data
 const coreValues = [
   { title: "Knowledge Sharing", desc: "Education accessible to all students regardless of background." },
   { title: "Community First", desc: "Strong connections between students, seniors, and juniors." },
@@ -17,6 +21,12 @@ const coreValues = [
 ];
 
 export default function AboutPage() {
+  const missionRef = useRef(null);
+
+  const handleScroll = () => {
+    missionRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="bg-gray-50 text-gray-800">
       {/* Hero Section */}
@@ -31,8 +41,11 @@ export default function AboutPage() {
         <p className="mt-4 max-w-2xl mx-auto text-lg">
           VidyaSetu is Nepal's first academic resource sharing platform, connecting students across the country to share knowledge, resources, and opportunities.
         </p>
-        <button className="mt-6 px-6 py-2 bg-white text-green-700 rounded-full shadow-md hover:scale-105 transition">
-          About VidyaSetu
+        <button
+          onClick={handleScroll}
+          className="mt-6 px-6 py-2 bg-white text-green-700 rounded-full shadow-md hover:scale-105 transition"
+        >
+          Learn About VidyaSetu
         </button>
       </section>
 
@@ -52,7 +65,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section className="max-w-4xl mx-auto py-12 px-6 text-center">
+      <section ref={missionRef} className="max-w-4xl mx-auto py-12 px-6 text-center">
         <h2 className="text-3xl font-bold mb-4">Our Mission</h2>
         <p className="text-gray-600">
           To democratize education in Nepal by creating a centralized platform where students can freely access, share, and exchange academic resources.
@@ -108,9 +121,11 @@ export default function AboutPage() {
         <div className="grid md:grid-cols-2 gap-8">
           {/* Lekhraj Ghimire */}
           <div className="bg-white shadow-md rounded-xl p-6 hover:shadow-lg transition">
-            <div className="w-16 h-16 bg-blue-900 text-white flex items-center justify-center mx-auto rounded-full text-xl font-bold">
-              LG
-            </div>
+            <img
+              src={lekhrajImg} // place image in public folder
+              alt="Lekhraj Ghimire"
+              className="w-24 h-24 rounded-full object-cover mx-auto"
+            />
             <h3 className="mt-4 font-semibold text-lg">Lekhraj Ghimire</h3>
             <p className="text-gray-500">Passionate Student</p>
             <p className="text-gray-600 mt-3 text-sm">
@@ -125,13 +140,23 @@ export default function AboutPage() {
                 Student Advocacy
               </span>
             </div>
+            <a
+              href="#" // replace with real portfolio link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-block px-4 bg-green-600 text-white rounded-full hover:bg-green-700 transition"
+            >
+              Portfolio
+            </a>
           </div>
 
           {/* Dipesh Rijal */}
           <div className="bg-white shadow-md rounded-xl p-6 hover:shadow-lg transition">
-            <div className="w-16 h-16 bg-blue-900 text-white flex items-center justify-center mx-auto rounded-full text-xl font-bold">
-              DR
-            </div>
+            <img
+              src={dipeshImg} // place image in public folder
+              alt="Dipesh Rijal"
+              className="w-24 h-24 rounded-full object-cover mx-auto"
+            />
             <h3 className="mt-4 font-semibold text-lg">Dipesh Rijal</h3>
             <p className="text-gray-500">Passionate Student</p>
             <p className="text-gray-600 mt-3 text-sm">
@@ -146,24 +171,32 @@ export default function AboutPage() {
                 Collaboration
               </span>
             </div>
+            <a
+              href="#" // replace with real portfolio link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-block px-4 bg-green-600 text-white rounded-full hover:bg-green-700 transition"
+            >
+              Portfolio 
+            </a>
           </div>
         </div>
       </section>
 
       {/* Impact */}
-      <section className=" py-16 px-6 text-center">
+      <section className="py-16 px-6 text-center">
         <h2 className="text-3xl font-bold">Our Impact</h2>
         <div className="grid md:grid-cols-3 gap-6 mt-8 max-w-5xl mx-auto">
           <div>
-            <h3 className="text-2xl  text-blue-900 font-bold">₹2.5M+</h3>
+            <h3 className="text-2xl text-blue-900 font-bold">₹2.5M+</h3>
             <p>Saved by students on textbooks</p>
           </div>
           <div>
-            <h3 className="text-2xl  text-green-600 font-bold">15,000+</h3>
+            <h3 className="text-2xl text-green-600 font-bold">15,000+</h3>
             <p>Resources shared by community</p>
           </div>
           <div>
-            <h3 className="text-2xl  text-orange-700 font-bold">95%</h3>
+            <h3 className="text-2xl text-orange-700 font-bold">95%</h3>
             <p>Student satisfaction rate</p>
           </div>
         </div>

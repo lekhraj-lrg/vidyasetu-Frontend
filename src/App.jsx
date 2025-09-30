@@ -6,21 +6,22 @@ import Footer from './components/Footer.jsx';
 import NotesPage from './pages/note.jsx';
 import AboutPage from './pages/about.jsx';
 import ContactPage from './pages/contact.jsx';
+import Loginpage from './authentication/login.jsx';
+import SignupPage from './authentication/join.jsx';
+import MarketplaceComingSoon from './pages/marketplace.jsx';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
-        {/* Home Route */}
         <Route path="/" element={<Home />} />
-        {/* Notes Route */}
         <Route path="/notes" element={<NotesPage />} />
-        {/* Placeholder Routes */}
-        <Route path="/marketplace" element={<h1 className="p-10 text-center">Marketplace Coming Soon 🚀</h1>} />
+        <Route path="/marketplace" element={<MarketplaceComingSoon/>} />
         <Route path="/about" element={<AboutPage/>} />
         <Route path="/contact" element={<ContactPage/>} />
-        <Route path="/login" element={<h1 className="p-10 text-center">Login Page</h1>} />
+        <Route path="/login" element={<Loginpage/>} />
+        <Route path="/signup" element={<SignupPage/>} />
       </Routes>
       <Footer />
     </BrowserRouter>
